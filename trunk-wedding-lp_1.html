@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRUNK(HOTEL) WEDDING</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#ffffff;--gray:#dce3e8;--light-gray:#f4f6f7;
+  --black:#111111;--mid-gray:#888888;--dark:#0a0a0a;
+  --accent:#c9a96e;
+  --serif-jp:'Noto Serif JP','Hiragino Mincho ProN','Yu Mincho',serif;
+  --serif-en:'Playfair Display','Georgia',serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--black);font-family:var(--serif-jp);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+
+/* ── HERO ── */
+.hero{
+  position:relative;height:100vh;min-height:600px;
+  background:var(--white);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:2rem;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 30%,rgba(201,169,110,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-label{font-family:var(--serif-en);font-size:11px;letter-spacing:.3em;color:var(--mid-gray);text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeUp .8s ease .8s forwards;}
+.hero-title{font-family:var(--serif-en);font-size:clamp(2.4rem,9vw,4.2rem);font-weight:700;letter-spacing:.04em;color:var(--black);line-height:1.12;margin-bottom:1.2rem;opacity:0;animation:fadeUp .9s ease 1s forwards;}
+.hero-subtitle{font-family:var(--serif-jp);font-size:12px;letter-spacing:.22em;color:var(--mid-gray);margin-bottom:3rem;opacity:0;animation:fadeUp .8s ease 1.2s forwards;}
+.hero-cta{display:inline-block;border:1px solid var(--black);color:var(--black);text-decoration:none;font-family:var(--serif-en);font-size:11px;letter-spacing:.25em;text-transform:uppercase;padding:14px 44px;transition:background .3s,color .3s;opacity:0;animation:fadeUp .8s ease 1.4s forwards;}
+.hero-cta:hover{background:var(--black);color:var(--white);}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--serif-en);font-size:10px;letter-spacing:.2em;color:var(--mid-gray);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .6s ease 2s forwards;}
+.hero-scroll::after{content:'';width:1px;height:40px;background:var(--mid-gray);display:block;animation:pulse 2s ease-in-out 2.2s infinite;}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ── SECTIONS ── */
+section{padding:80px 24px;}
+.section-label{font-family:var(--serif-en);font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--mid-gray);margin-bottom:1rem;}
+.section-title{font-family:var(--serif-en);font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700;letter-spacing:.03em;color:var(--black);margin-bottom:.5rem;line-height:1.2;}
+.section-title-jp{font-family:var(--serif-jp);font-size:13px;color:var(--mid-gray);letter-spacing:.15em;margin-bottom:2rem;}
+.divider{width:40px;height:1px;background:var(--black);margin:1.5rem 0;}
+p.body-text{font-family:var(--serif-jp);font-size:14px;line-height:2;color:#444;max-width:600px;}
+
+/* ── VENUE ── */
+.venue-section{background:var(--light-gray);}
+.venue-image-block{margin:2rem -24px;background:var(--gray);aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+.venue-image-block img{width:100%;height:100%;object-fit:cover;}
+.img-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--mid-gray);font-family:var(--serif-en);font-size:10px;letter-spacing:.2em;text-transform:uppercase;}
+.img-ph svg{opacity:.4;}
+.venue-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2rem;}
+.tag{border:1px solid var(--black);font-family:var(--serif-en);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:6px 16px;color:var(--black);background:transparent;transition:background .25s,color .25s;cursor:default;}
+.tag:hover{background:var(--black);color:var(--white);}
+
+/* ── GALLERY ── */
+.gallery-section{background:var(--black);}
+.gallery-section .section-label{color:#555;}
+.gallery-section .section-title{color:var(--white);}
+.gallery-section .section-title-jp{color:#666;}
+.gallery-section .divider{background:#444;}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:2rem;}
+.gallery-item{aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;}
+.gallery-item:first-child{grid-column:1/-1;aspect-ratio:16/9;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .6s ease;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-item-label{position:absolute;bottom:0;left:0;right:0;padding:12px;background:rgba(0,0,0,.55);font-family:var(--serif-en);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--white);z-index:1;}
+.gallery-ph{font-family:var(--serif-en);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#444;}
+
+/* ── SERVICE ── */
+.service-section{background:var(--white);}
+.service-list{margin-top:2rem;display:flex;flex-direction:column;}
+.service-item{padding:28px 0;border-bottom:1px solid var(--gray);display:flex;gap:20px;align-items:flex-start;transition:background .2s,padding-left .2s;}
+.service-item:hover{background:#f9f9f9;padding-left:8px;}
+.service-num{font-family:var(--serif-en);font-size:28px;font-weight:700;color:var(--black);line-height:1;min-width:36px;opacity:.15;}
+.service-content h3{font-family:var(--serif-en);font-size:15px;font-weight:700;letter-spacing:.1em;margin-bottom:6px;}
+.service-content h3 .jp{font-family:var(--serif-jp);font-size:12px;color:var(--mid-gray);margin-left:8px;font-weight:400;}
+.service-content p{font-family:var(--serif-jp);font-size:13px;color:#555;line-height:1.9;}
+
+/* ── DRESS ── */
+.dress-section{background:var(--black);}
+.dress-section .section-label{color:#555;}
+.dress-section .section-title{color:var(--white);}
+.dress-section .section-title-jp{color:#666;}
+.dress-section .divider{background:#444;}
+.dress-section p.body-text{color:#999;}
+.dress-scroll{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem;}
+.dress-item{background:#1a1a1a;display:flex;align-items:stretch;overflow:hidden;transition:transform .3s;}
+.dress-item:hover{transform:translateX(4px);}
+.dress-image{width:120px;min-height:160px;background:#222;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+.dress-image img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
+.dress-image-ph{font-family:var(--serif-en);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:#444;text-align:center;z-index:0;position:relative;}
+.dress-info{padding:20px;display:flex;flex-direction:column;justify-content:center;border-left:2px solid #333;}
+.dress-info .en-title{font-family:var(--serif-en);font-size:15px;font-weight:700;letter-spacing:.08em;margin-bottom:6px;color:var(--white);}
+.dress-info .jp-desc{font-family:var(--serif-jp);font-size:12px;color:#888;line-height:1.8;}
+
+/* ── BUDGET ── */
+.budget-section{background:var(--light-gray);}
+.budget-note{font-family:var(--serif-jp);font-size:11px;color:var(--mid-gray);margin-top:1rem;line-height:1.8;}
+.budget-table{width:100%;border-collapse:collapse;margin-top:2rem;font-family:var(--serif-jp);}
+.budget-table th{font-family:var(--serif-en);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid-gray);font-weight:400;text-align:left;padding:10px 0;border-bottom:2px solid var(--black);}
+.budget-table td{padding:16px 0;border-bottom:1px solid var(--gray);font-size:13px;vertical-align:top;}
+.budget-table td:last-child{text-align:right;font-family:var(--serif-en);font-size:14px;font-weight:700;}
+.budget-table tr:hover td{background:#ececec;}
+.plan-name{font-family:var(--serif-en);font-size:14px;font-weight:700;display:block;margin-bottom:4px;}
+.plan-name-jp{font-size:11px;color:var(--mid-gray);}
+
+/* ── CTA ── */
+.cta-section{background:var(--black);text-align:center;padding:100px 24px 80px;}
+.cta-section .section-label{color:#555;}
+.cta-section .section-title{color:var(--white);}
+.cta-section p{font-family:var(--serif-jp);font-size:13px;color:#888;line-height:2;margin-bottom:2.5rem;}
+.cta-btn{display:inline-block;border:1px solid var(--white);color:var(--white);text-decoration:none;font-family:var(--serif-en);font-size:11px;letter-spacing:.25em;text-transform:uppercase;padding:16px 48px;transition:background .3s,color .3s;}
+.cta-btn:hover{background:var(--white);color:var(--black);}
+.cta-sub{margin-top:1.5rem;font-family:var(--serif-en);font-size:10px;letter-spacing:.15em;color:#555;}
+
+footer{background:#0a0a0a;color:#444;text-align:center;padding:32px 24px;font-family:var(--serif-en);font-size:10px;letter-spacing:.2em;text-transform:uppercase;border-top:1px solid #1e1e1e;}
+footer a{color:#444;text-decoration:none;}
+
+/* ── LIGHTBOX ── */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:99990;align-items:center;justify-content:center;cursor:zoom-out;}
+#lightbox.open{display:flex;}
+#lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border:1px solid #333;}
+#lb-close{position:absolute;top:20px;right:24px;font-family:var(--serif-en);font-size:28px;color:#fff;cursor:pointer;line-height:1;background:none;border:none;opacity:.6;transition:opacity .2s;}
+#lb-close:hover{opacity:1;}
+
+/* ── EDIT TOGGLE BUTTON ── */
+#edit-toggle{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  background:var(--black);color:var(--white);border:none;
+  font-family:var(--serif-en);font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  padding:12px 20px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);
+  transition:background .2s,transform .2s;
+}
+#edit-toggle:hover{background:#333;transform:translateY(-1px);}
+#edit-toggle.editing-active{background:var(--accent);color:var(--black);}
+
+/* ── EDITOR PANEL ── */
+#editor-panel{
+  position:fixed;top:0;right:-400px;width:380px;height:100vh;
+  background:#fff;border-left:1px solid #ddd;z-index:9998;
+  overflow:hidden;transition:right .35s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;box-shadow:-4px 0 32px rgba(0,0,0,.08);
+}
+#editor-panel.open{right:0;}
+.ep-header{padding:14px 20px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;background:#fff;flex-shrink:0;}
+.ep-header h2{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:#111;}
+.ep-header-right{display:flex;align-items:center;gap:12px;}
+.ep-close{background:none;border:none;font-size:22px;cursor:pointer;color:#999;line-height:1;transition:color .15s;}
+.ep-close:hover{color:#111;}
+.ep-tabs{display:flex;border-bottom:1px solid #eee;background:#fafafa;flex-shrink:0;}
+.ep-tab{flex:1;padding:11px 6px;font-size:10px;letter-spacing:.08em;text-align:center;cursor:pointer;border:none;background:none;color:#aaa;border-bottom:2px solid transparent;text-transform:uppercase;font-weight:600;transition:color .15s,border-color .15s;}
+.ep-tab.active{color:#111;border-bottom-color:#111;background:#fff;}
+.ep-body{padding:16px;flex:1;overflow-y:auto;}
+.ep-section{margin-bottom:28px;}
+.ep-section-title{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#bbb;margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid #f0f0f0;}
+.ep-field{margin-bottom:10px;}
+.ep-field label{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#666;margin-bottom:4px;}
+.ep-field label .ep-field-key{font-size:9px;color:#ccc;font-family:monospace;}
+.ep-field input,.ep-field textarea{
+  width:100%;border:1px solid #e8e8e8;border-radius:3px;
+  padding:8px 10px;font-size:12px;font-family:var(--serif-jp);
+  resize:vertical;outline:none;color:#222;background:#fff;
+  transition:border-color .15s;
+}
+.ep-field input:focus,.ep-field textarea:focus{border-color:#111;box-shadow:0 0 0 2px rgba(17,17,17,.05);}
+.ep-field textarea{min-height:56px;line-height:1.6;}
+
+/* image upload */
+.ep-img-upload{
+  width:100%;padding:14px;border:1.5px dashed #ddd;border-radius:4px;
+  text-align:center;cursor:pointer;font-size:11px;color:#aaa;
+  background:#fafafa;display:block;transition:border-color .15s,background .15s;
+}
+.ep-img-upload:hover{border-color:#999;background:#f4f4f4;color:#666;}
+.ep-img-upload input[type=file]{display:none;}
+.ep-img-preview{width:100%;height:90px;object-fit:cover;border-radius:3px;margin-top:6px;display:none;border:1px solid #eee;}
+.ep-img-preview.show{display:block;}
+.ep-img-actions{display:flex;gap:6px;margin-top:6px;}
+.ep-img-clear{font-size:10px;color:#c00;cursor:pointer;display:none;padding:4px 8px;border:1px solid #fcc;border-radius:2px;background:#fff8f8;transition:background .15s;}
+.ep-img-clear:hover{background:#fee;}
+.ep-img-clear.show{display:inline-block;}
+
+/* actions bar */
+.ep-actions{padding:12px 16px;border-top:1px solid #eee;display:flex;flex-direction:column;gap:6px;background:#fff;flex-shrink:0;}
+.ep-btn{width:100%;padding:11px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:opacity .15s,background .15s;border-radius:2px;font-weight:600;}
+.ep-btn-primary{background:#111;color:#fff;border:1px solid #111;}
+.ep-btn-secondary{background:#fff;color:#111;border:1px solid #ccc;}
+.ep-btn-danger{background:#fff;color:#c00;border:1px solid #fcc;}
+.ep-btn-accent{background:var(--accent);color:#fff;border:1px solid var(--accent);}
+.ep-btn:hover{opacity:.78;}
+.ep-save-status{font-size:10px;color:#aaa;text-align:center;min-height:14px;padding:2px 0;}
+.ep-save-status.ok{color:#2a8a5a;}
+.ep-save-status.err{color:#c00;}
+.ep-save-status.warn{color:#c8820a;}
+
+/* json / save area */
+.ep-json-area{
+  width:100%;height:80px;border:1px solid #e8e8e8;border-radius:3px;
+  font-size:10px;font-family:monospace;padding:8px;resize:none;outline:none;
+  margin-top:6px;color:#555;background:#f9f9f9;
+}
+.ep-json-area:focus{border-color:#111;}
+.save-tab-note{font-size:11px;color:#999;line-height:1.8;margin-bottom:10px;}
+.save-tab-row{display:flex;gap:6px;margin-top:6px;}
+.save-tab-row .ep-btn{flex:1;}
+
+/* auto-save indicator */
+#autosave-dot{
+  width:7px;height:7px;border-radius:50%;background:#ccc;
+  display:inline-block;transition:background .4s;
+  position:relative;top:-1px;
+}
+#autosave-dot.saved{background:#2a8a5a;}
+#autosave-dot.dirty{background:var(--accent);}
+
+/* live-edit outline */
+.lp-editable:focus{outline:2px dashed rgba(201,169,110,.6);outline-offset:2px;background:rgba(201,169,110,.04);}
+
+/* toast */
+#toast{
+  position:fixed;bottom:80px;right:24px;z-index:99999;
+  background:#111;color:#fff;font-family:var(--serif-en);font-size:11px;
+  letter-spacing:.1em;padding:10px 18px;border-radius:2px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  max-width:240px;line-height:1.5;text-align:center;
+}
+#toast.show{opacity:1;}
+
+/* tag editing */
+.tags-edit-row{display:flex;gap:6px;margin-top:6px;align-items:center;}
+.tags-edit-row input{flex:1;border:1px solid #e8e8e8;border-radius:3px;padding:7px 9px;font-size:11px;outline:none;}
+.tags-edit-row input:focus{border-color:#111;}
+.tags-edit-row button{padding:7px 12px;font-size:10px;background:#111;color:#fff;border:none;border-radius:3px;cursor:pointer;white-space:nowrap;}
+.ep-tag-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.ep-tag-chip{display:flex;align-items:center;gap:4px;border:1px solid #ddd;border-radius:2px;padding:4px 8px;font-size:10px;background:#fafafa;}
+.ep-tag-chip button{background:none;border:none;cursor:pointer;color:#c00;font-size:12px;line-height:1;padding:0;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero::before"></div>
+  <p class="hero-label" data-key="hero_label">Catstreet, Shibuya — Tokyo</p>
+  <h1 class="hero-title" data-key="hero_title">TRUNK<br>(HOTEL)<br>WEDDING</h1>
+  <p class="hero-subtitle" data-key="hero_subtitle">- 2026.09 RENEWAL OPEN -</p>
+  <a class="hero-cta" href="https://catstreet.trunk-hotel.com/wedding/" target="_blank" data-key="hero_cta">Explore Our Wedding</a>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- VENUE -->
+<section class="venue-section reveal">
+  <p class="section-label">About the Venue</p>
+  <h2 class="section-title" data-key="venue_title">The Space</h2>
+  <p class="section-title-jp" data-key="venue_title_jp">会場紹介</p>
+  <div class="divider"></div>
+  <p class="body-text" data-key="venue_body">渋谷・キャットストリートに佇むTRUNK(HOTEL)は、都心とは思えない豊かな緑に包まれたブティックホテル。自然光と木の温もりが息づく"森のチャペル"、コンセプトの異なる4つの披露宴会場（MORI・KEYAKI・ONDEN・SORANIWA）を擁し、ワンフロア貸切でプライベート感あふれる特別な一日を叶えます。2026年9月、全館リニューアルオープン。</p>
+  <div class="venue-image-block" id="venue-img-wrap">
+    <div class="img-ph"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Venue Photo</span></div>
+  </div>
+  <div class="venue-tags" id="venue-tags-wrap">
+    <span class="tag">Boutique Hotel</span>
+    <span class="tag">Cat Street</span>
+    <span class="tag">森のチャペル</span>
+    <span class="tag">4 Banquet Halls</span>
+    <span class="tag">One Floor Exclusive</span>
+    <span class="tag">2026 Renewal Open</span>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section reveal">
+  <p class="section-label">Photo Gallery</p>
+  <h2 class="section-title" data-key="gallery_title">Gallery</h2>
+  <p class="section-title-jp" data-key="gallery_title_jp">フォトギャラリー</p>
+  <div class="divider"></div>
+  <div class="gallery-grid">
+    <div class="gallery-item" id="g0"><div class="gallery-ph">CHAPEL</div><div class="gallery-item-label" data-key="g0_label">Chapel — 森のチャペル</div></div>
+    <div class="gallery-item" id="g1"><div class="gallery-ph">MORI</div><div class="gallery-item-label" data-key="g1_label">Banquet — MORI</div></div>
+    <div class="gallery-item" id="g2"><div class="gallery-ph">ONDEN</div><div class="gallery-item-label" data-key="g2_label">Banquet — ONDEN</div></div>
+    <div class="gallery-item" id="g3"><div class="gallery-ph">KEYAKI</div><div class="gallery-item-label" data-key="g3_label">Terrace — KEYAKI</div></div>
+    <div class="gallery-item" id="g4"><div class="gallery-ph">SORANIWA</div><div class="gallery-item-label" data-key="g4_label">Rooftop — SORANIWA</div></div>
+  </div>
+</section>
+
+<!-- SERVICE -->
+<section class="service-section reveal">
+  <p class="section-label">Our Services</p>
+  <h2 class="section-title" data-key="service_title">What We Offer</h2>
+  <p class="section-title-jp" data-key="service_title_jp">サービス訴求</p>
+  <div class="divider"></div>
+  <div class="service-list">
+    <div class="service-item"><span class="service-num">01</span><div class="service-content"><h3 data-key="s1_title">Cuisine <span class="jp" data-key="s1_title_jp">料理・ドリンク</span></h3><p data-key="s1_body">国際賞を受賞したホテルシェフが手がける、フレンチと和食を融合させた「フュージョン美食」。お箸でいただける繊細なコース料理と厳選ドリンクで、五感で楽しむ食体験をお届けします。</p></div></div>
+    <div class="service-item"><span class="service-num">02</span><div class="service-content"><h3 data-key="s2_title">Coordination <span class="jp" data-key="s2_title_jp">専任プランナー</span></h3><p data-key="s2_body">経験豊富な専任プランナーが式当日まで二人に寄り添い、衣裳・装花・料理・演出まで「トータルコーディネート」でおふたりらしさを丁寧にカタチにします。</p></div></div>
+    <div class="service-item"><span class="service-num">03</span><div class="service-content"><h3 data-key="s3_title">Décor &amp; Flowers <span class="jp" data-key="s3_title_jp">装花・装飾</span></h3><p data-key="s3_body">「natural&amp;organic」「shabby chic」「japanese modern」など、こだわりのパーティーコンセプトに合わせた装花・装飾で、世界にひとつだけの披露宴会場を創り上げます。</p></div></div>
+    <div class="service-item"><span class="service-num">04</span><div class="service-content"><h3 data-key="s4_title">Stay &amp; Hospitality <span class="jp" data-key="s4_title_jp">宿泊・ホスピタリティ</span></h3><p data-key="s4_body">渋谷のアイデンティティとセンスが宿る客室で、ゲストをお迎え。新郎新婦のブライダルスイートをはじめ、ご親族の着替えスペースまで、ホテルならではの上質な設備が揃います。</p></div></div>
+  </div>
+</section>
+
+<!-- DRESS -->
+<section class="dress-section reveal">
+  <p class="section-label">Dress Collection</p>
+  <h2 class="section-title" data-key="dress_title">The Dress</h2>
+  <p class="section-title-jp" data-key="dress_title_jp">ドレス紹介</p>
+  <div class="divider"></div>
+  <p class="body-text" data-key="dress_body">テイストの異なる5社の提携ドレスショップをご用意。NY・パリ・ミラノのインポートドレスから、日本人の美しさを引き出すオリジナルブランドまで、おふたりの理想の一着をご提案します。</p>
+  <div class="dress-scroll">
+    <div class="dress-item"><div class="dress-image" id="d0"><div class="dress-image-ph">DRESS 01</div></div><div class="dress-info"><p class="en-title" data-key="d0_title">Import Collection</p><p class="jp-desc" data-key="d0_desc">ニコール・フェリシアやダニエル・フランケルなど、NY・パリ・ミラノの世界的ブランドを豊富に展開。新たな発見のあるラインナップが魅力のMIRROR MIRRORより。</p></div></div>
+    <div class="dress-item"><div class="dress-image" id="d1"><div class="dress-image-ph">DRESS 02</div></div><div class="dress-info"><p class="en-title" data-key="d1_title">Original &amp; Semi-Order</p><p class="jp-desc" data-key="d1_desc">デザイナー横畑早苗が主宰するnae. ATELIERのオリジナルドレス。日本人の花嫁の魅力を引き出す、シンプルで上品かつモードなシルエット。レンタル・セミオーダー対応。</p></div></div>
+    <div class="dress-item"><div class="dress-image" id="d2"><div class="dress-image-ph">DRESS 03</div></div><div class="dress-info"><p class="en-title" data-key="d2_title">Total Beauty</p><p class="jp-desc" data-key="d2_desc">ドレスだけでなく、アクセサリー・ヘアメイク・ネイル・ブーケまでトータルコーディネート。花嫁を最大限に輝かせるビューティプロデュースも提供します。</p></div></div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section class="budget-section reveal">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title" data-key="budget_title">Budget Guide</h2>
+  <p class="section-title-jp" data-key="budget_title_jp">予算感紹介</p>
+  <div class="divider"></div>
+  <p class="body-text" data-key="budget_body">お日にち・人数・シーズンに合わせた多彩なプランをご用意。期間限定の特典付きプランも充実しています。まずはブライダルフェアにてお気軽にご相談ください。</p>
+  <table class="budget-table">
+    <thead><tr><th>Plan</th><th style="text-align:right">Est. Budget</th></tr></thead>
+    <tbody>
+      <tr><td><span class="plan-name" data-key="p1_name">Intimate</span><span class="plan-name-jp" data-key="p1_jp">少人数・家族婚（〜30名）</span></td><td data-key="p1_price">¥2.26M〜</td></tr>
+      <tr><td><span class="plan-name" data-key="p2_name">Standard</span><span class="plan-name-jp" data-key="p2_jp">通常規模（60名）</span></td><td data-key="p2_price">¥2.68M〜</td></tr>
+      <tr><td><span class="plan-name" data-key="p3_name">Grand</span><span class="plan-name-jp" data-key="p3_jp">大人数（100〜150名）</span></td><td data-key="p3_price">¥4.03M〜</td></tr>
+    </tbody>
+  </table>
+  <p class="budget-note" data-key="budget_note">※上記は参考価格（税込）です。お日にち・人数・シーズンにより変動します。</p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal">
+  <p class="section-label">Next Step</p>
+  <h2 class="section-title" data-key="cta_title">Ready to Begin?</h2>
+  <p data-key="cta_body">ブライダルフェアのご予約を完了されたあなたへ。<br>当日は専任スタッフが全館ご案内し、国産牛の試食もお楽しみいただけます。<br>スタッフ一同、心よりお待ちしております。</p>
+  <a class="cta-btn" href="https://catstreet.trunk-hotel.com/wedding/" target="_blank" data-key="cta_btn">Visit Official Website</a>
+  <p class="cta-sub" data-key="cta_sub">TRUNK(HOTEL) — 5-31 Jingumae, Shibuya, Tokyo</p>
+</section>
+
+<footer><a href="https://catstreet.trunk-hotel.com/wedding/" target="_blank">© TRUNK(HOTEL) WEDDING</a></footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button id="lb-close">×</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- EDIT TOGGLE -->
+<button id="edit-toggle">✏ Edit</button>
+
+<!-- EDITOR PANEL -->
+<div id="editor-panel">
+  <div class="ep-header">
+    <h2>Editor</h2>
+    <div class="ep-header-right">
+      <span id="autosave-dot" title="自動保存ステータス"></span>
+      <button class="ep-close" id="ep-close">×</button>
+    </div>
+  </div>
+  <div class="ep-tabs">
+    <button class="ep-tab active" data-tab="text">テキスト</button>
+    <button class="ep-tab" data-tab="images">画像</button>
+    <button class="ep-tab" data-tab="tags">タグ</button>
+    <button class="ep-tab" data-tab="save">保存</button>
+  </div>
+  <div class="ep-body" id="ep-body"></div>
+  <div class="ep-actions" id="ep-actions"></div>
+</div>
+
+<script>
+'use strict';
+// ═══════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════
+const STORAGE_KEY = 'trunk_wedding_edits_v2';
+let imgData = {};           // id → base64 | null
+let tags = [];              // current tag list
+let isDirty = false;
+
+// ═══════════════════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════════════════
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function domText(key) {
+  const el = document.querySelector('[data-key="'+key+'"]');
+  if (!el) return '';
+  return el.innerHTML.replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'');
+}
+function applyText(key, val) {
+  const el = document.querySelector('[data-key="'+key+'"]');
+  if (el) el.innerHTML = val.replace(/\n/g,'<br>');
+}
+function applyImg(id, src) {
+  const container = document.getElementById(id);
+  if (!container) return;
+  const ph = container.querySelector('.img-ph,.gallery-ph,.dress-image-ph');
+  let img = container.querySelector('img');
+  if (src) {
+    if (!img) { img = document.createElement('img'); container.prepend(img); }
+    img.src = src;
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;';
+    container.style.position = 'relative';
+    if (ph) ph.style.display = 'none';
+    // lightbox on click for gallery items
+    if (container.classList.contains('gallery-item')) {
+      img.style.cursor = 'zoom-in';
+      img.onclick = () => openLightbox(src);
+    }
+  } else {
+    if (img) img.remove();
+    if (ph) ph.style.display = '';
+  }
+}
+function applyTags(list) {
+  const wrap = document.getElementById('venue-tags-wrap');
+  if (!wrap) return;
+  wrap.innerHTML = list.map(t => '<span class="tag">'+escHtml(t)+'</span>').join('');
+}
+function toast(msg, duration) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(() => el.classList.remove('show'), duration || 2400);
+}
+function setDot(state) { // 'saved'|'dirty'|''
+  const dot = document.getElementById('autosave-dot');
+  dot.className = state;
+  dot.title = state === 'saved' ? '保存済み' : state === 'dirty' ? '未保存の変更あり' : '';
+}
+function markDirty() {
+  isDirty = true;
+  setDot('dirty');
+}
+
+// ═══════════════════════════════════════════════
+//  SCROLL REVEAL
+// ═══════════════════════════════════════════════
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: .10 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ═══════════════════════════════════════════════
+//  LIGHTBOX
+// ═══════════════════════════════════════════════
+function openLightbox(src) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lb-img').src = src;
+  lb.classList.add('open');
+}
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this || e.target.id === 'lb-close') this.classList.remove('open');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('lightbox').classList.remove('open');
+});
+
+// ═══════════════════════════════════════════════
+//  EDITOR OPEN / CLOSE
+// ═══════════════════════════════════════════════
+const panel = document.getElementById('editor-panel');
+const editBtn = document.getElementById('edit-toggle');
+editBtn.addEventListener('click', () => {
+  const open = panel.classList.toggle('open');
+  editBtn.classList.toggle('editing-active', open);
+  editBtn.textContent = open ? '× Close' : '✏ Edit';
+});
+document.getElementById('ep-close').addEventListener('click', () => {
+  panel.classList.remove('open');
+  editBtn.classList.remove('editing-active');
+  editBtn.textContent = '✏ Edit';
+});
+
+// ═══════════════════════════════════════════════
+//  TAB SWITCHING
+// ═══════════════════════════════════════════════
+let currentTab = 'text';
+document.querySelectorAll('.ep-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.ep-tab').forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  currentTab = t.dataset.tab;
+  renderTab(currentTab);
+}));
+
+// ═══════════════════════════════════════════════
+//  TEXT SECTIONS CONFIG
+// ═══════════════════════════════════════════════
+const TEXT_SECTIONS = [
+  {title:'Hero', fields:[
+    {key:'hero_label',  label:'ロケーションラベル'},
+    {key:'hero_title',  label:'メインタイトル', multi:true},
+    {key:'hero_subtitle',label:'サブタイトル'},
+    {key:'hero_cta',    label:'CTAボタン文言'},
+  ]},
+  {title:'会場紹介', fields:[
+    {key:'venue_title',   label:'見出し（英）'},
+    {key:'venue_title_jp',label:'見出し（日）'},
+    {key:'venue_body',    label:'本文', multi:true},
+  ]},
+  {title:'ギャラリー', fields:[
+    {key:'gallery_title',   label:'見出し（英）'},
+    {key:'gallery_title_jp',label:'見出し（日）'},
+    {key:'g0_label',label:'①ラベル'},{key:'g1_label',label:'②ラベル'},{key:'g2_label',label:'③ラベル'},
+    {key:'g3_label',label:'④ラベル'},{key:'g4_label',label:'⑤ラベル'},
+  ]},
+  {title:'サービス', fields:[
+    {key:'service_title',   label:'見出し（英）'},
+    {key:'service_title_jp',label:'見出し（日）'},
+    {key:'s1_title',label:'①タイトル'},{key:'s1_body',label:'①本文',multi:true},
+    {key:'s2_title',label:'②タイトル'},{key:'s2_body',label:'②本文',multi:true},
+    {key:'s3_title',label:'③タイトル'},{key:'s3_body',label:'③本文',multi:true},
+    {key:'s4_title',label:'④タイトル'},{key:'s4_body',label:'④本文',multi:true},
+  ]},
+  {title:'ドレス', fields:[
+    {key:'dress_title',   label:'見出し（英）'},
+    {key:'dress_title_jp',label:'見出し（日）'},
+    {key:'dress_body',    label:'本文',multi:true},
+    {key:'d0_title',label:'ドレス①タイトル'},{key:'d0_desc',label:'ドレス①説明',multi:true},
+    {key:'d1_title',label:'ドレス②タイトル'},{key:'d1_desc',label:'ドレス②説明',multi:true},
+    {key:'d2_title',label:'ドレス③タイトル'},{key:'d2_desc',label:'ドレス③説明',multi:true},
+  ]},
+  {title:'予算', fields:[
+    {key:'budget_title',   label:'見出し（英）'},
+    {key:'budget_title_jp',label:'見出し（日）'},
+    {key:'budget_body',    label:'本文',multi:true},
+    {key:'p1_name',label:'プラン①名'},{key:'p1_jp',label:'プラン①説明'},{key:'p1_price',label:'プラン①金額'},
+    {key:'p2_name',label:'プラン②名'},{key:'p2_jp',label:'プラン②説明'},{key:'p2_price',label:'プラン②金額'},
+    {key:'p3_name',label:'プラン③名'},{key:'p3_jp',label:'プラン③説明'},{key:'p3_price',label:'プラン③金額'},
+    {key:'budget_note',label:'注記',multi:true},
+  ]},
+  {title:'CTA', fields:[
+    {key:'cta_title',label:'見出し（英）'},
+    {key:'cta_body', label:'本文',multi:true},
+    {key:'cta_btn',  label:'ボタン文言'},
+    {key:'cta_sub',  label:'サブテキスト'},
+  ]},
+];
+
+const IMG_ITEMS = [
+  {title:'会場メイン画像',    id:'venue-img-wrap'},
+  {title:'ギャラリー① (ワイド)', id:'g0'},
+  {title:'ギャラリー②',      id:'g1'},
+  {title:'ギャラリー③',      id:'g2'},
+  {title:'ギャラリー④',      id:'g3'},
+  {title:'ギャラリー⑤',      id:'g4'},
+  {title:'ドレス①',         id:'d0'},
+  {title:'ドレス②',         id:'d1'},
+  {title:'ドレス③',         id:'d2'},
+];
+
+const DEFAULT_TAGS = ['Boutique Hotel','Cat Street','森のチャペル','4 Banquet Halls','One Floor Exclusive','2026 Renewal Open'];
+
+// ═══════════════════════════════════════════════
+//  RENDER TABS
+// ═══════════════════════════════════════════════
+function renderTab(tab) {
+  const body = document.getElementById('ep-body');
+  const actions = document.getElementById('ep-actions');
+  body.innerHTML = '';
+  actions.innerHTML = '';
+
+  if (tab === 'text') renderTextTab(body, actions);
+  else if (tab === 'images') renderImagesTab(body, actions);
+  else if (tab === 'tags') renderTagsTab(body, actions);
+  else if (tab === 'save') renderSaveTab(body, actions);
+}
+
+// ── TEXT TAB ──────────────────────────────────
+function renderTextTab(body, actions) {
+  TEXT_SECTIONS.forEach(sec => {
+    const w = document.createElement('div');
+    w.className = 'ep-section';
+    w.innerHTML = '<div class="ep-section-title">'+escHtml(sec.title)+'</div>';
+    sec.fields.forEach(f => {
+      const cur = domText(f.key);
+      const d = document.createElement('div');
+      d.className = 'ep-field';
+      if (f.multi) {
+        d.innerHTML = '<label>'+escHtml(f.label)+'</label><textarea data-edit="'+f.key+'">'+escHtml(cur)+'</textarea>';
+      } else {
+        d.innerHTML = '<label>'+escHtml(f.label)+'</label><input type="text" data-edit="'+f.key+'" value="'+escHtml(cur)+'">';
+      }
+      w.appendChild(d);
+    });
+    body.appendChild(w);
+  });
+
+  actions.innerHTML = '<button class="ep-btn ep-btn-primary" id="ep-apply">✓ テキストを適用</button><div class="ep-save-status" id="ep-status"></div>';
+  document.getElementById('ep-apply').addEventListener('click', () => {
+    document.querySelectorAll('[data-edit]').forEach(inp => {
+      applyText(inp.dataset.edit, inp.value || '');
+    });
+    markDirty();
+    autoSave();
+    setStatus('✓ テキストを適用しました', 'ok');
+    toast('テキストを適用しました');
+  });
+}
+
+// ── IMAGES TAB ───────────────────────────────
+function renderImagesTab(body, actions) {
+  const note = document.createElement('p');
+  note.className = 'save-tab-note';
+  note.textContent = 'JPG・PNG・WEBP をアップロードできます。ギャラリー画像はクリックで拡大表示されます。';
+  body.appendChild(note);
+
+  IMG_ITEMS.forEach(item => {
+    const w = document.createElement('div');
+    w.className = 'ep-section';
+    const src = imgData[item.id] || '';
+    w.innerHTML = `
+      <div class="ep-section-title">${escHtml(item.title)}</div>
+      <div class="ep-field">
+        <label class="ep-img-upload" for="file-${item.id}">
+          <input type="file" id="file-${item.id}" accept="image/*" data-img-id="${item.id}">
+          📁 クリックして画像を選択
+        </label>
+        <img class="ep-img-preview ${src ? 'show' : ''}" id="prev-${item.id}" src="${src}">
+        <div class="ep-img-actions">
+          <span class="ep-img-clear ${src ? 'show' : ''}" data-clear-id="${item.id}">✕ 削除</span>
+        </div>
+      </div>`;
+    body.appendChild(w);
+
+    w.querySelector('#file-'+item.id).addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        imgData[item.id] = ev.target.result;
+        const prev = document.getElementById('prev-'+item.id);
+        prev.src = ev.target.result;
+        prev.classList.add('show');
+        w.querySelector('[data-clear-id="'+item.id+'"]').classList.add('show');
+        applyImg(item.id, ev.target.result);
+        markDirty();
+        autoSave();
+        toast('画像を適用しました');
+      };
+      reader.readAsDataURL(file);
+    });
+
+    w.querySelector('[data-clear-id="'+item.id+'"]').addEventListener('click', () => {
+      imgData[item.id] = null;
+      const prev = document.getElementById('prev-'+item.id);
+      prev.src = ''; prev.classList.remove('show');
+      w.querySelector('[data-clear-id="'+item.id+'"]').classList.remove('show');
+      w.querySelector('#file-'+item.id).value = '';
+      applyImg(item.id, null);
+      markDirty();
+      autoSave();
+      toast('画像を削除しました');
+    });
+  });
+
+  actions.innerHTML = '<div class="ep-save-status ok" id="ep-status">画像は選択後に即時適用されます</div>';
+}
+
+// ── TAGS TAB ─────────────────────────────────
+function renderTagsTab(body, actions) {
+  const w = document.createElement('div');
+  w.className = 'ep-section';
+  w.innerHTML = `
+    <div class="ep-section-title">会場タグ</div>
+    <p class="save-tab-note">タグは会場紹介セクションに表示されます。追加・削除が可能です。</p>
+    <div class="tags-edit-row">
+      <input type="text" id="tag-input" placeholder="新しいタグを入力...">
+      <button id="tag-add-btn">追加</button>
+    </div>
+    <div class="ep-tag-list" id="tag-chip-list"></div>`;
+  body.appendChild(w);
+
+  function refreshChips() {
+    const list = document.getElementById('tag-chip-list');
+    list.innerHTML = tags.map((t,i) =>
+      `<div class="ep-tag-chip">${escHtml(t)}<button data-i="${i}" title="削除">×</button></div>`
+    ).join('');
+    list.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tags.splice(+btn.dataset.i, 1);
+        applyTags(tags);
+        refreshChips();
+        markDirty(); autoSave();
+      });
+    });
+  }
+  refreshChips();
+
+  document.getElementById('tag-add-btn').addEventListener('click', () => {
+    const inp = document.getElementById('tag-input');
+    const val = inp.value.trim();
+    if (val && !tags.includes(val)) {
+      tags.push(val);
+      applyTags(tags);
+      refreshChips();
+      markDirty(); autoSave();
+      inp.value = '';
+    }
+  });
+  document.getElementById('tag-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('tag-add-btn').click();
+  });
+
+  actions.innerHTML = `
+    <button class="ep-btn ep-btn-danger" id="tags-reset">デフォルトに戻す</button>
+    <div class="ep-save-status" id="ep-status"></div>`;
+  document.getElementById('tags-reset').addEventListener('click', () => {
+    tags = [...DEFAULT_TAGS];
+    applyTags(tags);
+    refreshChips();
+    markDirty(); autoSave();
+    setStatus('デフォルトタグに戻しました','ok');
+  });
+}
+
+// ── SAVE TAB ─────────────────────────────────
+function renderSaveTab(body, actions) {
+  body.innerHTML = `
+    <div class="ep-section">
+      <div class="ep-section-title">ブラウザに自動保存</div>
+      <p class="save-tab-note">編集内容は変更のたびにブラウザへ自動保存されます。次回アクセス時に自動で復元されます。</p>
+      <button class="ep-btn ep-btn-secondary" id="btn-clear-local" style="width:100%">🗑 保存データを消去</button>
+    </div>
+    <div class="ep-section">
+      <div class="ep-section-title">JSONエクスポート / インポート</div>
+      <p class="save-tab-note">データをJSONとして書き出し・読み込みできます（画像の base64 を含むため大きくなることがあります）。</p>
+      <button class="ep-btn ep-btn-secondary" id="btn-gen-json" style="width:100%;margin-bottom:6px;">JSONを生成</button>
+      <textarea class="ep-json-area" id="export-json" placeholder="「JSONを生成」を押してください" readonly></textarea>
+      <div class="save-tab-row">
+        <button class="ep-btn ep-btn-secondary" id="btn-copy-json">📋 コピー</button>
+        <button class="ep-btn ep-btn-secondary" id="btn-dl-json">⬇ DL</button>
+      </div>
+      <p class="save-tab-note" style="margin-top:16px;">保存したJSONをここに貼り付けてインポート：</p>
+      <textarea class="ep-json-area" id="import-json" placeholder="JSONをここに貼り付け..."></textarea>
+      <button class="ep-btn ep-btn-primary" id="btn-import" style="width:100%;margin-top:6px;">⬆ インポートして反映</button>
+    </div>
+    <div class="ep-section">
+      <div class="ep-section-title">HTMLファイルとしてダウンロード</div>
+      <p class="save-tab-note">現在の表示状態（画像・テキスト・タグすべて込み）を単一HTMLとしてダウンロードします。エディターUIは含まれません。</p>
+      <button class="ep-btn ep-btn-accent" id="btn-export-html" style="width:100%;">⬇ HTMLをダウンロード</button>
+    </div>`;
+  actions.innerHTML = '<div class="ep-save-status" id="ep-status"></div>';
+
+  document.getElementById('btn-clear-local').addEventListener('click', () => {
+    if (confirm('ブラウザに保存された編集データをすべて削除しますか？')) {
+      localStorage.removeItem(STORAGE_KEY);
+      setStatus('保存データを削除しました。ページをリロードしてください。','warn');
+    }
+  });
+
+  document.getElementById('btn-gen-json').addEventListener('click', () => {
+    const texts = {};
+    TEXT_SECTIONS.flatMap(s => s.fields).forEach(f => {
+      const el = document.querySelector('[data-key="'+f.key+'"]');
+      if (el) texts[f.key] = el.innerHTML;
+    });
+    const saveData = { version:2, texts, imgs:{}, tags };
+    Object.entries(imgData).forEach(([id,src]) => { if (src) saveData.imgs[id] = src; });
+    document.getElementById('export-json').value = JSON.stringify(saveData, null, 2);
+    setStatus('✓ JSON生成完了','ok');
+  });
+
+  document.getElementById('btn-copy-json').addEventListener('click', () => {
+    const txt = document.getElementById('export-json').value;
+    if (!txt) { setStatus('先にJSONを生成してください','err'); return; }
+    navigator.clipboard.writeText(txt).then(() => { setStatus('✓ コピーしました','ok'); toast('コピーしました'); }).catch(() => setStatus('コピーに失敗しました','err'));
+  });
+
+  document.getElementById('btn-dl-json').addEventListener('click', () => {
+    const txt = document.getElementById('export-json').value;
+    if (!txt) { setStatus('先にJSONを生成してください','err'); return; }
+    dlBlob(txt, 'trunk-wedding-save.json', 'application/json');
+    setStatus('✓ ダウンロード開始','ok');
+  });
+
+  document.getElementById('btn-import').addEventListener('click', () => {
+    const txt = document.getElementById('import-json').value.trim();
+    if (!txt) { setStatus('JSONを貼り付けてください','err'); return; }
+    try {
+      const data = JSON.parse(txt);
+      importData(data);
+      setStatus('✓ インポート・反映完了','ok');
+      toast('インポートしました');
+    } catch(e) {
+      setStatus('JSONが不正です','err');
+    }
+  });
+
+  document.getElementById('btn-export-html').addEventListener('click', exportHtml);
+}
+
+function setStatus(msg, type) {
+  const el = document.getElementById('ep-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.className = 'ep-save-status' + (type ? ' '+type : '');
+}
+
+// ═══════════════════════════════════════════════
+//  AUTO SAVE (localStorage)
+// ═══════════════════════════════════════════════
+let saveTimer = null;
+function autoSave() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    const texts = {};
+    TEXT_SECTIONS.flatMap(s => s.fields).forEach(f => {
+      const el = document.querySelector('[data-key="'+f.key+'"]');
+      if (el) texts[f.key] = el.innerHTML;
+    });
+    const saveData = { version:2, texts, imgs:{}, tags };
+    Object.entries(imgData).forEach(([id,src]) => { if (src) saveData.imgs[id] = src; });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
+      isDirty = false;
+      setDot('saved');
+    } catch(e) {
+      // quota exceeded (large base64 images)
+      // save without images
+      try {
+        const slim = { version:2, texts, imgs:{}, tags };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(slim));
+        isDirty = false;
+        setDot('saved');
+      } catch(e2) { /* ignore */ }
+    }
+  }, 600);
+}
+
+function importData(data) {
+  if (!data || !data.texts) throw new Error('invalid');
+  Object.entries(data.texts).forEach(([k,v]) => {
+    const el = document.querySelector('[data-key="'+k+'"]');
+    if (el) el.innerHTML = v;
+  });
+  if (data.imgs) {
+    Object.entries(data.imgs).forEach(([id,src]) => {
+      imgData[id] = src;
+      applyImg(id, src);
+    });
+  }
+  if (Array.isArray(data.tags)) {
+    tags = data.tags;
+    applyTags(tags);
+  }
+}
+
+function loadSaved() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    importData(data);
+    setDot('saved');
+  } catch(e) { /* ignore corrupt data */ }
+}
+
+// ═══════════════════════════════════════════════
+//  HTML EXPORT
+// ═══════════════════════════════════════════════
+function exportHtml() {
+  // Build a clean clone without editor UI
+  const clone = document.documentElement.cloneNode(true);
+  clone.querySelector('#editor-panel')?.remove();
+  clone.querySelector('#edit-toggle')?.remove();
+  clone.querySelector('#lightbox')?.remove();
+  clone.querySelector('#toast')?.remove();
+  // Remove the inline script (last <script>)
+  const scripts = clone.querySelectorAll('script');
+  scripts[scripts.length - 1]?.remove();
+  // Add minimal lightbox back for exported page
+  const lbHtml = `
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;">
+  <button id="lb-close" style="position:absolute;top:20px;right:24px;font-size:28px;color:#fff;cursor:pointer;background:none;border:none;opacity:.6;">×</button>
+  <img id="lb-img" src="" style="max-width:90vw;max-height:90vh;object-fit:contain;">
+</div>
+<script>
+(function(){
+  var lb=document.getElementById('lightbox'),lbi=document.getElementById('lb-img');
+  document.querySelectorAll('.gallery-item img').forEach(function(img){
+    img.style.cursor='zoom-in';
+    img.addEventListener('click',function(){lb.style.display='flex';lbi.src=this.src;});
+  });
+  lb.addEventListener('click',function(e){if(e.target===this||e.target.id==='lb-close')lb.style.display='none';});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.style.display='none';});
+})();
+<\/script>`;
+  const body = clone.querySelector('body');
+  if (body) body.insertAdjacentHTML('beforeend', lbHtml);
+
+  const html = '<!DOCTYPE html>\n<html lang="ja">\n' + clone.innerHTML + '\n</html>';
+  dlBlob(html, 'trunk-wedding-lp.html', 'text/html');
+  toast('HTMLをダウンロードしました');
+}
+
+function dlBlob(content, filename, type) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([content], { type }));
+  a.download = filename;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+
+// ═══════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════
+// Init tags from DOM
+(function initTags() {
+  const wrap = document.getElementById('venue-tags-wrap');
+  tags = Array.from(wrap.querySelectorAll('.tag')).map(t => t.textContent.trim());
+})();
+
+loadSaved();
+renderTab('text');
+</script>
+</body>
+</html>
